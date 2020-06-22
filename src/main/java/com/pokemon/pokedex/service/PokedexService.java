@@ -21,45 +21,42 @@ public class PokedexService {
 
     public List<CardPokemon> buscarPokemon() {
 
-        int i = 2;
-        String cadena = "";
-        List<CardPokemon> buscar = new ArrayList();
-        CardPokemon pokemon = new CardPokemon();
-        CardPokemon infoPoke = new CardPokemon();
+        try {
 
-        //LLamado a la API
-        RestTemplate restTemplate = new RestTemplate();
-        PokemonInfo result2 = restTemplate.getForObject(URL_LIST_POKEMON + i, PokemonInfo.class);
+            int i = 2;
+            String cadena = "";
+            List<CardPokemon> buscar = new ArrayList();
+            CardPokemon pokemon = new CardPokemon();
 
-         //System.out.println(result2.getTypes().get(0).getType().getName());
-        //System.out.println(result2.getTypes().get(1).getType().getName());
+            //LLamado a la API
+            RestTemplate restTemplate = new RestTemplate();
 
-        //System.out.println(result2.getTypes().get(1).getType().getName());
-        for (int j = 1; j < 21; j++) {
-            PokemonInfo result = restTemplate.getForObject(URL_LIST_POKEMON + j, PokemonInfo.class);
-            pokemon = new CardPokemon();
-            pokemon.setNombre(result.getName());
-            pokemon.setPeso(result.getWeight());
-            pokemon.setUrl(URL_IMG_POKEMON + j + EXT_IMG_POKEMON);
-            
-            if (result.getTypes().size() > 1) {
-                for (int h = 0; h < result.getTypes().size(); h++) {
-                    //System.out.println(result.getTypes().get(h).getType().getName());
-                    cadena = cadena + "-" + result.getTypes().get(h).getType().getName();
-                    //System.out.println(cadena);
+            for (int j = 1; j < 21; j++) {
+                PokemonInfo result = restTemplate.getForObject(URL_LIST_POKEMON + j, PokemonInfo.class);
+                pokemon = new CardPokemon();
+                pokemon.setNombre(result.getName());
+                pokemon.setPeso(result.getWeight());
+                pokemon.setUrl(URL_IMG_POKEMON + j + EXT_IMG_POKEMON);
+
+                if (result.getTypes().size() > 1) {
+                    for (int h = 0; h < result.getTypes().size(); h++) {
+                        cadena = cadena + "-" + result.getTypes().get(h).getType().getName();
+                    }
+                    pokemon.setTipo(cadena);
+                    cadena = "";
+                } else {
+                    pokemon.setTipo(result.getTypes().get(0).getType().getName());
                 }
-                pokemon.setTipo(cadena);
-                cadena = "";
+
+                buscar.add(pokemon);
             }
-            else{
-                pokemon.setTipo(result.getTypes().get(0).getType().getName());
-            }
-            
-            buscar.add(pokemon);
+            return buscar;
+
         }
-
-        return buscar;
-
+        catch(Exception e){
+            e.getMessage();
+        }
+        return null;
     }
 
 }
