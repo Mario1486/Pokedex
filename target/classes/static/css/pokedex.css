@@ -1,0 +1,11 @@
+/* 
+    Created on : 19 jun. 2020, 11:17:01
+    Author     : Mario
+*/
+.mg-destacados .card img {
+    height: 100px;
+    object-fit: contain;
+}
+.mg-destacados .card {
+    height: 100%;
+}
