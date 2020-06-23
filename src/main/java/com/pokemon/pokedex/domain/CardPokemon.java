@@ -53,7 +53,4 @@ public class CardPokemon {
         this.tipo = tipo;
     }
     
-    
-         
-    
 }
