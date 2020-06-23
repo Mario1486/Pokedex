@@ -27,7 +27,7 @@ public class ListadoController {
     }
     
     
-    @RequestMapping("/home.html")
+    @RequestMapping("/")
     public String ListarPokedex(Model model){
         List<CardPokemon> buscar = pokedexService.buscarPokemon();
         model.addAttribute("poke", buscar);

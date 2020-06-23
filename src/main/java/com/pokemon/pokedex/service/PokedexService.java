@@ -23,7 +23,6 @@ public class PokedexService {
 
         try {
 
-            int i = 2;
             String cadena = "";
             List<CardPokemon> buscar = new ArrayList();
             CardPokemon pokemon = new CardPokemon();
