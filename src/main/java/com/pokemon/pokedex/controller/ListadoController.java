@@ -31,7 +31,7 @@ public class ListadoController {
     public String ListarPokedex(Model model){
         List<CardPokemon> buscar = pokedexService.buscarPokemon();
         model.addAttribute("poke", buscar);
-        return "home";
+        return "/home";
         
     }
     
